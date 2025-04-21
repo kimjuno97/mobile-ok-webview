@@ -22,20 +22,24 @@ async function result(result) {
   }
 }
 window.onload = function () {
-  // type 파라미터 읽기
   const params = new URLSearchParams(window.location.search);
-  const type = params.get("type"); // "dev" 또는 "prod"
+  const type = params.get("type");
+  const script = document.createElement("script");
 
-  // 조건에 따라 script 태그 동적 추가
-  if (type === "dev") {
-    const script = document.createElement("script");
-    script.src = "https://scert.mobile-ok.com/resources/js/index.js";
-    document.head.appendChild(script);
-  } else {
-    const script = document.createElement("script");
-    script.src = "https://cert.mobile-ok.com/resources/js/index.js";
-    document.head.appendChild(script);
-  }
+  // 스크립트 소스 설정
+  script.src =
+    type === "dev"
+      ? "https://scert.mobile-ok.com/resources/js/index.js"
+      : "https://cert.mobile-ok.com/resources/js/index.js";
 
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "result");
+  // 스크립트 로드 완료 후 실행
+  script.onload = () => {
+    MOBILEOK.process(
+      "https://api.illyilly.kr/pass/initial-data",
+      "MB",
+      "result"
+    );
+  };
+
+  document.head.appendChild(script);
 };
