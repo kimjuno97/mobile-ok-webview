@@ -34,11 +34,13 @@ window.onload = function () {
 
   // 스크립트 로드 완료 후 실행
   script.onload = () => {
-    MOBILEOK.process(
-      "https://api.illyilly.kr/pass/initial-data",
-      "MB",
-      "result"
-    );
+    setTimeout(() => {
+      MOBILEOK.process(
+        "https://api.illyilly.kr/pass/initial-data",
+        "MB",
+        "result"
+      );
+    }, 1000);
   };
 
   document.head.appendChild(script);
