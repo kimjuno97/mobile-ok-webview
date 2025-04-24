@@ -2,6 +2,7 @@
 window.onload = function () {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
+  const token = params.get("token");
   const script = document.createElement("script");
 
   // 스크립트 소스 설정
@@ -13,6 +14,10 @@ window.onload = function () {
   // 스크립트 로드 완료 후 실행
   script.onload = () => {
     sendEventToFlutter("inProgress");
+
+    setTimeout(() => {
+      onReceiveToken(token);
+    }, 1000);
   };
 
   document.head.appendChild(script);
