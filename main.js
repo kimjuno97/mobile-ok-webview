@@ -54,7 +54,7 @@ function onReceiveToken(token) {
   MOBILEOK.process(
     "https://api.illyilly.kr/pass/initial-data/mobile",
     "MB",
-    ""
+    "result"
   );
 }
 
