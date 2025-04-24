@@ -46,7 +46,7 @@ async function result(result) {
 
 function onReceiveToken(token) {
   accessToken = token;
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "result");
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "");
 }
 
 // JS에서 Flutter로 이벤트 전송 함수
