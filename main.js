@@ -56,7 +56,7 @@ function onReceiveToken(token) {
   //   "MB",
   //   ""
   // );
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "NA", "result");
 }
 
 // JS에서 Flutter로 이벤트 전송 함수
