@@ -46,6 +46,8 @@ async function result(result) {
     console.log("error", error);
     // EventChannel.postMessage(`error ${error}`);
     window.alert("인증에 실패하였습니다.");
+  } finally {
+    window.close();
   }
 }
 
@@ -56,7 +58,7 @@ function onReceiveToken(token) {
   //   "MB",
   //   ""
   // );
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "NA", "result");
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
 }
 
 // JS에서 Flutter로 이벤트 전송 함수
