@@ -1,7 +1,7 @@
+let accessToken;
+
 async function result(result) {
   try {
-    // const resultParse = JSON.parse(result);
-    console.log("resultParse :", result);
     const url = "https://api.illyilly.kr/v1/users/auth/pass";
     const requestOptions = {
       method: "POST",
@@ -14,13 +14,29 @@ async function result(result) {
 
     const response = await fetch(url, requestOptions);
     console.log("response", response);
+    EventChannel.postMessage(response);
+    EventChannel.postMessage("success");
   } catch (error) {
     console.log("error", error);
+    EventChannel.postMessage(`error ${error}`);
     window.alert("인증에 실패하였습니다.");
-  } finally {
-    window.location.href = "/signup/verification";
   }
 }
+
+function onReceiveToken(token) {
+  accessToken = token;
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "result");
+}
+
+// JS에서 Flutter로 이벤트 전송 함수
+function sendEventToFlutter(event) {
+  // Flutter WebView 환경에서만 동작
+  if (window.EventChannel) {
+    EventChannel.postMessage(event);
+  }
+}
+
+// 페이지 로드
 window.onload = function () {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
@@ -34,13 +50,7 @@ window.onload = function () {
 
   // 스크립트 로드 완료 후 실행
   script.onload = () => {
-    setTimeout(() => {
-      MOBILEOK.process(
-        "https://api.illyilly.kr/pass/initial-data",
-        "MB",
-        "result"
-      );
-    }, 1000);
+    sendEventToFlutter("inProgress");
   };
 
   document.head.appendChild(script);
