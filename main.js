@@ -1,3 +1,23 @@
+// 페이지 로드
+window.onload = function () {
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+  const script = document.createElement("script");
+
+  // 스크립트 소스 설정
+  script.src =
+    type === "dev"
+      ? "https://scert.mobile-ok.com/resources/js/index.js"
+      : "https://cert.mobile-ok.com/resources/js/index.js";
+
+  // 스크립트 로드 완료 후 실행
+  script.onload = () => {
+    sendEventToFlutter("inProgress");
+  };
+
+  document.head.appendChild(script);
+};
+
 let accessToken;
 
 async function result(result) {
@@ -36,23 +56,3 @@ function sendEventToFlutter(event) {
     EventChannel.postMessage(event);
   }
 }
-
-// 페이지 로드
-window.onload = function () {
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
-  const script = document.createElement("script");
-
-  // 스크립트 소스 설정
-  script.src =
-    type === "dev"
-      ? "https://scert.mobile-ok.com/resources/js/index.js"
-      : "https://cert.mobile-ok.com/resources/js/index.js";
-
-  // 스크립트 로드 완료 후 실행
-  script.onload = () => {
-    sendEventToFlutter("inProgress");
-  };
-
-  document.head.appendChild(script);
-};
