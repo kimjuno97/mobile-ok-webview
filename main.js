@@ -25,6 +25,7 @@ async function result(result) {
 
 function onReceiveToken(token) {
   accessToken = token;
+  EventChannel.postMessage(token);
   MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "result");
 }
 
