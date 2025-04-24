@@ -13,11 +13,6 @@ window.onload = function () {
   // 스크립트 로드 완료 후 실행
   script.onload = () => {
     sendEventToFlutter("inProgress");
-    setTimeout(() => {
-      onReceiveToken(
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJJTExZSUxMWSIsIklEIjoxNjIsImV4cCI6MTc0NTQ4MDU3MX0.aGGz_GWUBoWA9wUgApVLRNx2hUdWKJJ5pTrrHIZM8uQWC5AKiIvHNKT4i8LUUnKf_JTuQLxuRPj9US1COcrjZfiLF2lF4zVaVt7m3Fi510jIVtE7nYVwVVmcRSygfww0FRODbUPFxUV8r1YTN8v2VnK-v8rQbdRBwAQ_b4HQu-FMvZqCDPR6ofzkUBGFr9lzZSMRwewzBw9LKvU2xX-cJA8rLVf9EAVttrdKdx2GfC5PNNPjc5AAHJ6GlWHjbQQHtvvs4iKnDLz7Cf3Z0U5mcW4MNmNQvf0Etcs47HBpsIv0ww5bjHmK7u4-wppr9tW4jjzcBkt6P2SVDMb9eDk_Wg"
-      );
-    }, 1000);
   };
 
   document.head.appendChild(script);
@@ -40,12 +35,11 @@ async function result(result) {
     const response = await fetch(url, requestOptions);
     console.log("response", response);
     if (window.EventChannel) {
-      EventChannel.postMessage(response);
-      EventChannel.postMessage("success");
+      // EventChannel.postMessage("success");
     }
   } catch (error) {
     console.log("error", error);
-    EventChannel.postMessage(`error ${error}`);
+    // EventChannel.postMessage(`error ${error}`);
     window.alert("인증에 실패하였습니다.");
   }
 }
