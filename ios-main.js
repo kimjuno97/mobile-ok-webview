@@ -17,16 +17,15 @@ window.onload = function () {
       // 스크립트 로드 완료 시 Flutter에 알림
       window.successLoad.postMessage("successLoad");
     } catch (error) {
-      const oldErrorP = document.getElementById("error-message");
-      if (oldErrorP) oldErrorP.remove();
-
-      // 새 p 태그 생성 및 추가
-      const errorP = document.createElement("p");
-      errorP.textContent = error.message;
-      errorP.style.color = "red";
-      errorP.id = "error-message";
-
-      document.body.appendChild(errorP);
+      // error 여부 확인 필요시 주석 풀기
+      //   const oldErrorP = document.getElementById("error-message");
+      //   if (oldErrorP) oldErrorP.remove();
+      //   // 새 p 태그 생성 및 추가
+      //   const errorP = document.createElement("p");
+      //   errorP.textContent = error.message;
+      //   errorP.style.color = "red";
+      //   errorP.id = "error-message";
+      //   document.body.appendChild(errorP);
     }
 
     setTimeout(() => {
@@ -70,6 +69,7 @@ async function result(result) {
     // 에러 발생 시 Flutter에 전송
     window.mobileOkError.postMessage(`${error.message}`);
   } finally {
+    window.close();
   }
 }
 
@@ -81,9 +81,5 @@ function onReceiveToken(token) {
   document.body.appendChild(loading);
   accessToken = token;
 
-  MOBILEOK.process(
-    "https://api.illyilly.kr/pass/initial-data",
-    "MWV",
-    "result"
-  );
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
 }
