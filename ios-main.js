@@ -76,14 +76,10 @@ async function result(result) {
 function onReceiveToken(token) {
   // 새 p 태그 생성 및 추가
   const loading = document.createElement("p");
-  loading.textContent = "processLoading...";
+  loading.textContent = "processLoading... MB";
   loading.id = "loading-message";
   document.body.appendChild(loading);
   accessToken = token;
-  // MOBILEOK.process(
-  //   "https://api.illyilly.kr/pass/initial-data",
-  //   "NA",
-  //   "result"
-  // );
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
+
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "MB", "result");
 }
