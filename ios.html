@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mobile-ok-본인확인서비스</title>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js" async defer></script>
+  </head>
+  <body>
+    ios loading...
+    <script>
+      // 페이지 로드
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get("type");
+        const token = params.get("token");
+        const script = document.createElement("script");
+
+        // 스크립트 소스 설정
+        script.src =
+          type === "dev"
+            ? "https://scert.mobile-ok.com/resources/js/index.js"
+            : "https://cert.mobile-ok.com/resources/js/index.js";
+
+        // 스크립트 로드 완료 후 실행
+        script.onload = () => {
+          // 스크립트 로드 완료 시 Flutter에 알림
+          window.successLoad.postMessage("successLoad");
+
+          setTimeout(() => {
+            onReceiveToken(token);
+          }, 1000);
+        };
+
+        document.head.appendChild(script);
+      };
+
+      let accessToken;
+
+      async function result(result) {
+        try {
+          const url = "https://api.illyilly.kr/v1/users/auth/pass";
+          const requestOptions = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({ encodeToken: result }),
+          };
+
+          await fetch(url, requestOptions);
+          // 결제 성공 시 Flutter에 결과 전송
+          window.paymentResult.postMessage("success");
+        } catch (error) {
+          window.alert("인증에 실패하였습니다.");
+          // 에러 발생 시 Flutter에 전송
+          window.paymentError.postMessage(
+            `${error.message} \n paymentData: ${paymentData}`
+          );
+        } finally {
+        }
+      }
+
+      function onReceiveToken(token) {
+        accessToken = token;
+        // MOBILEOK.process(
+        //   "https://api.illyilly.kr/pass/initial-data",
+        //   "NA",
+        //   "result"
+        // );
+        MOBILEOK.process(
+          "https://api.illyilly.kr/pass/initial-data",
+          "HY",
+          "result"
+        );
+      }
+    </script>
+  </body>
+</html>
