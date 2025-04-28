@@ -45,10 +45,10 @@ async function result(result) {
 
 function onReceiveToken(token) {
   accessToken = token;
-  MOBILEOK.process(
-    "https://api.illyilly.kr/pass/initial-data/mobile",
-    "NA",
-    "result"
-  );
-  // MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
+  // MOBILEOK.process(
+  //   "https://api.illyilly.kr/pass/initial-data/mobile",
+  //   "NA",
+  //   "result"
+  // );
+  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
 }
