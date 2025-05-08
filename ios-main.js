@@ -50,14 +50,9 @@ async function result(result) {
       body: JSON.stringify({ encodeToken: result }),
     };
 
-    const response = await fetch(url, requestOptions);
-    window.invalidSignIn.postMessage(`response.status: ${response.status}`);
-    if (response.status == 400) {
-      window.invalidSignIn.postMessage(`response.status: ${response.status}`);
-    } else {
-      // 결제 성공 시 Flutter에 결과 전송
-      window.mobileOkResult.postMessage("success");
-    }
+    await fetch(url, requestOptions);
+    // 결제 성공 시 Flutter에 결과 전송
+    window.mobileOkResult.postMessage("success");
   } catch (error) {
     // 기존 에러 메시지 p 태그가 있으면 제거
     const oldErrorP = document.getElementById("error-message");
