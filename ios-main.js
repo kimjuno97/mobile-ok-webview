@@ -51,8 +51,9 @@ async function result(result) {
     };
 
     const response = await fetch(url, requestOptions);
+    window.invalidSignIn.postMessage(`response.status: ${response.status}`);
     if (response.status == 400) {
-      window.invalidSignIn.postMessage("invalidSignUp");
+      window.invalidSignIn.postMessage(`response.status: ${response.status}`);
     } else {
       // 결제 성공 시 Flutter에 결과 전송
       window.mobileOkResult.postMessage("success");
