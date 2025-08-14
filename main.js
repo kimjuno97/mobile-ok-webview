@@ -3,6 +3,8 @@ window.onload = function () {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type");
   const token = params.get("token");
+  const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
+  console.log("baseUrl", baseUrl);
   const script = document.createElement("script");
 
   // 스크립트 소스 설정
@@ -14,7 +16,7 @@ window.onload = function () {
   // 스크립트 로드 완료 후 실행
   script.onload = () => {
     setTimeout(() => {
-      onReceiveToken(token);
+      onReceiveToken({ token, baseUrl });
     }, 1000);
   };
 
@@ -25,7 +27,7 @@ let accessToken;
 
 async function result(result) {
   try {
-    const url = "https://api.illyilly.kr/v1/users/auth/pass";
+    const url = `${baseUrl}/v1/users/auth/pass`;
     const requestOptions = {
       method: "POST",
       headers: {
@@ -43,7 +45,7 @@ async function result(result) {
   }
 }
 
-function onReceiveToken(token) {
+function onReceiveToken({ token, baseUrl }) {
   accessToken = token;
-  MOBILEOK.process("https://api.illyilly.kr/pass/initial-data", "HY", "result");
+  MOBILEOK.process(`${baseUrl}/pass/initial-data`, "HY", "result");
 }
