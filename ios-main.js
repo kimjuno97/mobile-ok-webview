@@ -4,6 +4,7 @@ window.onload = function () {
   const type = params.get("type");
   const token = params.get("token");
   const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
+  /// [MEMO] 개발 완료시 제거
   console.log("baseUrl", baseUrl);
   const script = document.createElement("script");
 
@@ -42,6 +43,7 @@ let accessToken;
 
 async function result(result) {
   try {
+    /// [MEMO] 개발 완료시 url 확인
     const url = `${baseUrl}/v1/auth/verify`;
     // const url = `${baseUrl}/v1/users/auth/pass`;
     const requestOptions = {
