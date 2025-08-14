@@ -44,7 +44,7 @@ async function result(result) {
   } catch (error) {
     window.alert("인증에 실패하였습니다.");
   } finally {
-    window.close();
+    // window.close();
   }
 }
 

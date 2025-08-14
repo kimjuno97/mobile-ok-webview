@@ -74,7 +74,7 @@ async function result(result) {
     // 에러 발생 시 Flutter에 전송
     window.mobileOkError.postMessage(`${error.message}`);
   } finally {
-    window.close();
+    // window.close();
   }
 }
 
