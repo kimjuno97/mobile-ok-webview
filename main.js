@@ -5,9 +5,6 @@ const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
 
 // 페이지 로드
 window.onload = function () {
-  /// [MEMO] 개발 완료시 제거
-  console.log("baseUrl", baseUrl);
-
   const script = document.createElement("script");
   // 스크립트 소스 설정
   script.src =
@@ -45,7 +42,7 @@ async function result(result) {
   } catch (error) {
     window.alert("인증에 실패하였습니다.");
   } finally {
-    // window.close();
+    window.close();
   }
 }
 

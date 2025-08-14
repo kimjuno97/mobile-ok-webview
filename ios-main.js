@@ -3,8 +3,6 @@ const type = params.get("type");
 const token = params.get("token");
 const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
 
-/// [MEMO] 개발 완료시 제거
-console.log("baseUrl", baseUrl);
 // 페이지 로드
 window.onload = function () {
   const script = document.createElement("script");
@@ -75,7 +73,7 @@ async function result(result) {
     // 에러 발생 시 Flutter에 전송
     window.mobileOkError.postMessage(`${error.message}`);
   } finally {
-    // window.close();
+    window.close();
   }
 }
 
