@@ -42,7 +42,8 @@ let accessToken;
 
 async function result(result) {
   try {
-    const url = `${baseUrl}/v1/users/auth/pass`;
+    const url = `${baseUrl}/v1/auth/verify`;
+    // const url = `${baseUrl}/v1/users/auth/pass`;
     const requestOptions = {
       method: "POST",
       headers: {

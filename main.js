@@ -4,7 +4,6 @@ window.onload = function () {
   const type = params.get("type");
   const token = params.get("token");
   const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
-  console.log("baseUrl", baseUrl);
   const script = document.createElement("script");
 
   // 스크립트 소스 설정
@@ -27,7 +26,8 @@ let accessToken;
 
 async function result(result) {
   try {
-    const url = `${baseUrl}/v1/users/auth/pass`;
+    const url = `${baseUrl}/v1/auth/verify`;
+    // const url = `${baseUrl}/v1/users/auth/pass`;
     const requestOptions = {
       method: "POST",
       headers: {
