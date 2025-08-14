@@ -1,11 +1,12 @@
+const params = new URLSearchParams(window.location.search);
+const type = params.get("type");
+const token = params.get("token");
+const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
+
+/// [MEMO] 개발 완료시 제거
+console.log("baseUrl", baseUrl);
 // 페이지 로드
 window.onload = function () {
-  const params = new URLSearchParams(window.location.search);
-  const type = params.get("type");
-  const token = params.get("token");
-  const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
-  /// [MEMO] 개발 완료시 제거
-  console.log("baseUrl", baseUrl);
   const script = document.createElement("script");
 
   // 스크립트 소스 설정
