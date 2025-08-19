@@ -48,5 +48,6 @@ async function result(result) {
 
 function onReceiveToken({ token, baseUrl }) {
   accessToken = token;
-  MOBILEOK.process(`${baseUrl}/pass/initial-data`, "HY", "result");
+  // MOBILEOK.process(`${baseUrl}/pass/initial-data`, "HY", "result");
+  MOBILEOK.process(`${baseUrl}/pass/initial-data`, "MB", "result");
 }
