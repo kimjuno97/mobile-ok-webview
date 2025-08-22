@@ -2,12 +2,9 @@ const params = new URLSearchParams(window.location.search);
 const type = params.get("type");
 const token = params.get("token");
 const baseUrl = params.get("baseUrl") ?? "https://api.illyilly.kr";
-const loading = document.createElement("p");
-loading.textContent = `baseUrl : ${baseUrl}`;
-loading.id = "baseUrl-message";
-document.body.appendChild(loading);
 
-function startMobileOk() {
+// 페이지 로드
+window.onload = function () {
   const script = document.createElement("script");
 
   // 스크립트 소스 설정
@@ -39,46 +36,7 @@ function startMobileOk() {
   };
 
   document.head.appendChild(script);
-}
-document
-  .getElementById("myButton")
-  .addEventListener("click", async function () {
-    startMobileOk();
-  });
-// // 페이지 로드
-// window.onload = function () {
-//   const script = document.createElement("script");
-
-//   // 스크립트 소스 설정
-//   script.src =
-//     type === "dev"
-//       ? "https://scert.mobile-ok.com/resources/js/index.js"
-//       : "https://cert.mobile-ok.com/resources/js/index.js";
-
-//   // 스크립트 로드 완료 후 실행
-//   script.onload = () => {
-//     try {
-//       // 스크립트 로드 완료 시 Flutter에 알림
-//       window.successLoad.postMessage("successLoad");
-//     } catch (error) {
-//       // error 여부 확인 필요시 주석 풀기
-//       //   const oldErrorP = document.getElementById("error-message");
-//       //   if (oldErrorP) oldErrorP.remove();
-//       //   // 새 p 태그 생성 및 추가
-//       //   const errorP = document.createElement("p");
-//       //   errorP.textContent = error.message;
-//       //   errorP.style.color = "red";
-//       //   errorP.id = "error-message";
-//       //   document.body.appendChild(errorP);
-//     }
-
-//     setTimeout(() => {
-//       onReceiveToken({ token, baseUrl });
-//     }, 1000);
-//   };
-
-//   document.head.appendChild(script);
-// };
+};
 
 let accessToken;
 
@@ -122,7 +80,7 @@ async function result(result) {
 function onReceiveToken({ token, baseUrl }) {
   // 새 p 태그 생성 및 추가
   const loading = document.createElement("p");
-  loading.textContent = "processLoading... MWV";
+  loading.textContent = "processLoading... HY";
   loading.id = "loading-message";
   document.body.appendChild(loading);
   accessToken = token;
